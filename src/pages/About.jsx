@@ -20,6 +20,14 @@ const About = () => {
   }, []);
 
   return (
+  <>
+      <Helmet>
+  <title>About ThinkBiz Hightech Pvt. Ltd.</title>
+  <meta
+    name="description"
+    content="About ThinkBiz Hightech – Web, App, SEO & Digital Marketing Company"
+  />
+</Helmet>
     <div className="font-sans text-gray-800">
       {/* ================= HERO ================= */}
       <section className="py-6 px-6 bg-[#ff7515] text-black">
@@ -260,7 +268,7 @@ const About = () => {
 
       <WhatsAppButton />
       <Newsletter />
-    </div>
+    </div></>
   );
 };
 
