@@ -21,7 +21,13 @@ const About = () => {
 
   return (
     <div className="font-sans text-gray-800">
-      
+       <Helmet>
+        <title>About Us | ThinkBiz HighTech</title>
+        <meta
+          name="description"
+          content="Learn about ThinkBiz HighTech, a leading web, app & digital marketing company in India."
+        />
+      </Helmet>
       {/* ================= HERO ================= */}
       <section className="py-6 px-6 bg-[#ff7515] text-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-14">
