@@ -21,6 +21,48 @@ const About = () => {
 
   return (
     <div className="font-sans text-gray-800">
+
+       {/* ================= SEO ================= */}
+      <Helmet>
+        <title>
+          About ThinkBiz Hightech Pvt. Ltd. | Web, App, SEO & Digital Marketing Company
+        </title>
+
+        <meta
+          name="description"
+          content="ThinkBiz Hightech Pvt. Ltd. is a leading digital agency offering website development, mobile app development, SEO and digital marketing services to grow your business online."
+        />
+
+        <meta
+          name="keywords"
+          content="ThinkBiz Hightech, web development company, app development company, SEO services, digital marketing agency, website design company in India"
+        />
+
+        <meta name="author" content="ThinkBiz Hightech Pvt. Ltd." />
+
+        {/* Open Graph (Facebook, WhatsApp) */}
+        <meta property="og:title" content="About ThinkBiz Hightech Pvt. Ltd." />
+        <meta
+          property="og:description"
+          content="Results-driven digital agency delivering websites, apps, SEO & marketing solutions for business growth."
+        />
+        <meta property="og:url" content="https://www.thinkbizhightech.com/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.thinkbizhightech.com/og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About ThinkBiz Hightech Pvt. Ltd." />
+        <meta
+          name="twitter:description"
+          content="Professional web & app development, SEO and digital marketing company."
+        />
+        <meta name="twitter:image" content="https://www.thinkbizhightech.com/og-image.jpg" />
+      </Helmet>
+
+
+
+  
       {/* ================= HERO ================= */}
       <section className="py-6 px-6 bg-[#ff7515] text-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-14">
