@@ -7,7 +7,7 @@ import About from "./pages/About.jsx";
 import Services from "./pages/Services.jsx";
 import Contact from "./pages/Contact.jsx";
 import Industries from "./pages/Industries.jsx";
-import Package from "./pages/Package.jsx";
+import Pricing from "./pages/Pricing.jsx";
 import Career from "./pages/Career.jsx";
 import Policies from "./pages/Policies.jsx";
 import Admin from "./pages/Admin.jsx";
@@ -19,9 +19,11 @@ import ShippingAndDelivery from "./pages/ShippingAndDelivery.jsx";
 import CancellationAndRefund from "./pages/CancellationAndRefund.jsx";
 import ScrollToTop from "./assets/Component/ScrollToTop";
 import TrackAnalytics from "./TrackAnalytics";
+import {HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
   return (
+    <HelmetProvider>
     <Router>
       <ScrollToTop />
 
@@ -36,7 +38,7 @@ const App = () => {
         <Route path="/service/:serviceName" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/industries" element={<Industries />} />
-        <Route path="/package" element={<Package />} />
+<Route path="/pricing" element={<Pricing />} />
         <Route path="/career" element={<Career />} />
         <Route path="/policies" element={<Policies />} />
         <Route path="/admin" element={<Admin />} />
@@ -56,6 +58,7 @@ const App = () => {
 
       <Footer />
     </Router>
+    </HelmetProvider>
   );
 };
 

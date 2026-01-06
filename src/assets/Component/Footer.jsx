@@ -39,7 +39,7 @@ const Footer = () => {
               <img
                 src="https://syspree.com/wp-content/smush-webp/2024/08/Footer-logos-1.png.webp"
                 className="rounded"
-                alt=""
+                alt="payment method"
               />{" "}
             </div>{" "}
             {/* Button */}{" "}
@@ -104,7 +104,7 @@ const Footer = () => {
               </li>{" "}
               <li>
                 {" "}
-                <Link to="/Package" className="hover:text-orange-500">
+                <Link to="/Pricing" className="hover:text-orange-500">
                   {" "}
                   Pricing{" "}
                 </Link>{" "}

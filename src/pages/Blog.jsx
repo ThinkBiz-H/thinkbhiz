@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { ref, get, child } from "firebase/database";
+import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -33,6 +34,16 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-16 px-6 max-w-7xl mx-auto">
+       <Helmet>
+                      <title>Blog | ThinkBizHightech
+      
+              </title>
+               <meta
+                    name="Description"
+                    content="ThinkBizHighTech is the leading IT company in India, Which provides all IT Services like Website Design & Development, Digital Marketing and others.
+"
+                  />
+                  </Helmet>
       <h1 className="text-5xl font-extrabold mb-12 text-orange-500 text-center">
         Our Blog
       </h1>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { trackEvent } from "../trackEvent";
+import { Helmet } from 'react-helmet-async';
 
 // ======================= INDUSTRIES DATA WITH ONLINE IMAGES =======================
 const industriesData = [
@@ -307,6 +308,17 @@ const Industries = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-16 px-6 relative">
+ <Helmet>
+                      <title> IT industries | ThinkBizHightech
+
+      
+              </title>
+               <meta
+                    name="Description"
+                    content=" IT Industries driving innovation with cutting-edge technology solutions, delivering software, automation, and digital services to boost business growth and efficiency.
+"
+                  />
+                  </Helmet>
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-5xl font-extrabold mb-2 text-orange-500">
           Industries We Serve

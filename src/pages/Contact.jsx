@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Newsletter from "../assets/Component/NewsLetterbox";
 import WhatsAppButton from "../assets/Component/WhatsAppButton";
+import { Helmet } from 'react-helmet-async';
 
 import { trackEvent } from "../trackEvent";
 
@@ -93,6 +94,15 @@ const Contact = () => {
   return (
     <>
       <div className="min-h-screen bg-black text-white flex flex-col items-center py-16 px-6 md:px-16 border-b-4 border-orange-500">
+        <Helmet>
+                <title>Contact Us- ThinkBizHighTech
+
+        </title>
+         <meta
+              name="Description"
+              content="Contact us for all your IT needs! We are a leading IT company in Noida, delivering top-notch solutions with expertise and reliability."
+            />
+            </Helmet>
         <h1 className="text-5xl font-extrabold mb-12 text-orange-500">
           Contact Us
         </h1>

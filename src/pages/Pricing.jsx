@@ -700,7 +700,7 @@ function loadRazorpayScript() {
   });
 }
 
-const Package = () => {
+const Pricing = () => {
   const [billing, setBilling] = useState(
     Object.keys(packagesData).reduce((acc, service) => {
       acc[service] = "monthly";
@@ -858,4 +858,4 @@ const Package = () => {
   );
 };
 
-export default Package;
+export default Pricing;

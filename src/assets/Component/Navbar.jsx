@@ -154,7 +154,7 @@ const Navbar = () => {
 
           <li className="cursor-pointer hover:text-black">
             <Link
-              to="/package"
+              to="/Pricing"
               onClick={() =>
                 trackEvent("navbar_navigation", { page: "Pricing" })
               }
@@ -370,7 +370,7 @@ const Navbar = () => {
 
             <li>
               <Link
-                to="/package"
+                to="/Pricing"
                 onClick={() => {
                   setOpen(false);
                   trackEvent("navbar_mobile_nav", { page: "Pricing" });

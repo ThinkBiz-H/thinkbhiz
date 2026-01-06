@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import Newsletter from "../assets/Component/NewsLetterbox";
 import WhatsAppButton from "../assets/Component/WhatsAppButton";
 import { trackEvent } from "../trackEvent";
+import { Helmet } from "react-helmet-async";
+
 
 const serviceContent = {
   web: {
@@ -18,6 +20,10 @@ const serviceContent = {
       "CMS Integration",
       "Scalability",
     ],
+    metaTitle:
+   "Website Design & Development  | ThinkBiz Hightech",
+ metaDescription:
+   "ThinkBiz Hightech offers professional website design & development services including responsive design, SEO-friendly websites, and custom web solutions.",
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -42,6 +48,10 @@ const serviceContent = {
       "Push Notifications",
       "App Store Deployment",
     ],
+    metaTitle:
+   "Smart Mobile App Development Solutions",
+ metaDescription:
+   "Mobile App Development delivering fast, secure, and user-friendly Android and iOS apps designed to boost engagement, performance, and business growth worldwide.",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -66,6 +76,9 @@ const serviceContent = {
       "Brand Positioning",
       "Budget Optimization",
     ],
+    metaTitle:
+   "Complete Digital Marketing Services",
+ metaDescription:"Digital Marketing services designed to boost brand visibility, drive targeted traffic, and increase conversions through smart strategies and data-driven campaigns",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -89,6 +102,9 @@ const serviceContent = {
       "Content Optimization",
       "Regular SEO Reporting",
     ],
+    metaTitle:
+   "Best SEO Services to Rank Higher on Google",
+ metaDescription:"SEO Services focused on improving search rankings, increasing organic traffic, and boosting online visibility with proven strategies that deliver long-term results.",
     image:
       "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -99,6 +115,7 @@ const serviceContent = {
       "Ahrefs",
       "Screaming Frog",
     ],
+    
   },
   graphic: {
     title: "Graphic Designing",
@@ -110,6 +127,9 @@ const serviceContent = {
       "Marketing materials",
       "Digital graphics",
     ],
+    metaTitle:
+   "",
+ metaDescription:"",
     image:
       "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -133,6 +153,9 @@ const serviceContent = {
       "Automation Capabilities",
       "Maintenance & Support",
     ],
+    metaTitle:
+   "Professional Software Development Company",
+ metaDescription:"Our software development services empower businesses with secure, scalable resolutions, facilitating workflows, boosting performance, and driving digital growth.",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -159,6 +182,9 @@ const serviceContent = {
       "A/B Testing",
       "Bulk Email Sending",
     ],
+    metaTitle:
+   "Professional Email Marketing Services",
+ metaDescription:"Email Marketing services that create targeted, engaging campaigns to boost open rates, increase conversions, and grow your business through strategic, data-driven emails.",
     image:
       "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -182,6 +208,9 @@ const serviceContent = {
       "Task Scheduling & Monitoring",
       "Scalable AI Solutions",
     ],
+    metaTitle:
+   "AI Automation Solutions for Businesses",
+ metaDescription:"AI Automation services that streamline workflows, boost efficiency, and drive business growth using intelligent, smart, and scalable AI-powered solutions.",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -205,6 +234,9 @@ const serviceContent = {
       "Shorts & reels editing",
       "Brand storytelling through video",
     ],
+    metaTitle:
+   "",
+ metaDescription:"",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -228,6 +260,9 @@ const serviceContent = {
       "Offline & Online Marketing",
       "Audience Engagement",
     ],
+    metaTitle:
+   "Brand Promotion Services for Businesses",
+ metaDescription:"Brand Promotion services that boost visibility, increase engagement, and grow your business using strategic marketing, creative campaigns, and effective outreach.",
     image:
       "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -248,6 +283,9 @@ const serviceContent = {
       "Social media content",
       "Scriptwriting & storytelling",
     ],
+    metaTitle:
+   "",
+ metaDescription:"",
     image:
       "https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=800&q=80",
     technologies: [
@@ -273,6 +311,7 @@ const Services = () => {
   if (!service) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900 p-8">
+
         <h2 className="text-4xl font-extrabold mb-4 text-red-500">
           Service Not Found
         </h2>
@@ -299,6 +338,18 @@ const Services = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-900 flex justify-center items-center p-4 md:p-6">
+         <Helmet>
+    <title>{service.metaTitle}</title>
+    <meta name="description" content={service.metaDescription} />
+
+    {/* Optional SEO tags */}
+    <meta name="keywords" content={service.title} />
+    <meta property="og:title" content={service.metaTitle} />
+    <meta property="og:description" content={service.metaDescription} />
+    <meta property="og:image" content={service.image} />
+    <meta property="og:type" content="website" />
+  </Helmet>
+
         <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 bg-gray-800 rounded-3xl shadow-2xl border border-gray-700 p-6 md:p-10">
           {/* ================= MOBILE IMAGE (#1) ================= */}
           <div className="flex flex-col h-full items-center order-1 md:hidden">
