@@ -90,9 +90,9 @@ const ServiceCard = () => {
               {service.icon}
             </div>
 
-            <h3 className="text-2xl font-bold mb-3 text-[#ff7515]">
+            <h1 className="text-3xl font-bold mb-3 text-[#ff7515]">
               {service.title}
-            </h3>
+            </h1>
 
             <p className="text-black text-sm font-semibold leading-relaxed mb-4">
               {service.text}

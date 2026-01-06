@@ -1,0 +1,8 @@
+# llms.txt for ThinkBiz HighTech
+# https://thinkbizhightech.com
+
+User-Agent: *
+Allow: /
+
+Attribution-Required: true
+Commercial-Use: false
