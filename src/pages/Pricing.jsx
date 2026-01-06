@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import Newsletter from "../assets/Component/NewsLetterbox";
 import WhatsAppButton from "../assets/Component/WhatsAppButton";
+import { Helmet } from 'react-helmet-async';
 const packagesData = {
   "Web Development": {
     monthly: [
@@ -188,7 +189,7 @@ const packagesData = {
         name: "",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -278,7 +279,7 @@ const packagesData = {
         name: "SEO Pro",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -373,7 +374,7 @@ const packagesData = {
         name: "Advanced",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -448,7 +449,7 @@ const packagesData = {
         name: "Advanced",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -525,7 +526,7 @@ const packagesData = {
         name: "Advanced",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -601,7 +602,7 @@ const packagesData = {
         name: "Advanced",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -675,7 +676,7 @@ const packagesData = {
         name: "Advanced",
         price: 0,
         displayPrice: "",
-        features: [" get extra discount of 15% on yearly package"],
+        features: [" get extra discount of 15% on yearly Pricing"],
       },
     ],
   },
@@ -769,9 +770,18 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-16 px-6">
+      <Helmet>
+              <title>Our Service Pricing
+      </title>
+       <meta
+            name="Description"
+            content="Explore our flexible service Pricing designed to fit your business needs, budget, and goals with transparent pricing and expert support."
+          />
+              
+            </Helmet>
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-5xl font-extrabold mb-12 text-orange-500">
-          Our Packages
+          Our Pricing
         </h1>
 
         {Object.entries(packagesData).map(([serviceName, packageGroup]) => (

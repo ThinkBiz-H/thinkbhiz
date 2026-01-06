@@ -306,6 +306,7 @@ const Footer = () => {
           © {new Date().getFullYear()} ThinkBiz High Tech Pvt. Ltd. | All Rights
           Reserved{" "}
         </p>{" "}
+        
       </div>{" "}
     </footer>
   );

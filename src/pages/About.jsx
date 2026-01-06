@@ -29,7 +29,7 @@ const About = () => {
       name="Description"
       content="ThinkBizHighTech – We are a leading IT company in Noida, Which provides all the IT services."
     />
-        <link rel="canonical" href="https://www.tacobell.com/" />
+        
       </Helmet>
       {/* ================= HERO ================= */}
       <section className="py-6 px-6 bg-[#ff7515] text-black">
