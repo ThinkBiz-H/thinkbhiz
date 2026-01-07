@@ -1,3 +1,238 @@
+// import React, { useState } from "react";
+// import {
+//   FaFacebookF,
+//   FaWhatsapp,
+//   FaLinkedinIn,
+//   FaInstagram,
+//   FaPhoneAlt,
+//   FaEnvelope,
+//   FaMapMarkerAlt,
+// } from "react-icons/fa";
+
+// import { db } from "../firebase";
+// import { ref, push } from "firebase/database";
+
+// import emailjs from "@emailjs/browser";
+
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import Newsletter from "../assets/Component/NewsLetterbox";
+// import WhatsAppButton from "../assets/Component/WhatsAppButton";
+
+// import { trackEvent } from "../trackEvent";
+
+// const Contact = () => {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     phone: "",
+//     message: "",
+//   });
+
+//   const [errors, setErrors] = useState({});
+
+//   const handleChange = (e) => {
+//     setFormData((prev) => ({
+//       ...prev,
+//       [e.target.name]: e.target.value,
+//     }));
+//   };
+
+//   const validate = () => {
+//     let tempErrors = {};
+//     if (!formData.name.trim()) tempErrors.name = "Name is required";
+
+//     if (!formData.email.trim()) tempErrors.email = "Email is required";
+//     else if (
+//       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+//     )
+//       tempErrors.email = "Invalid email address";
+
+//     if (!formData.phone.trim()) tempErrors.phone = "Phone number is required";
+//     else if (!/^\d{10}$/.test(formData.phone))
+//       tempErrors.phone = "Phone number must be 10 digits";
+
+//     if (!formData.message.trim())
+//       tempErrors.message = "Please enter your message";
+
+//     setErrors(tempErrors);
+//     return Object.keys(tempErrors).length === 0;
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!validate()) return;
+
+//     try {
+//       /* 🔹 1. Save to Firebase */
+//       const contactRef = ref(db, "contacts");
+//       await push(contactRef, formData);
+
+//       /* 🔹 2. Send Email via EmailJS (FREE) */
+//       await emailjs.send(
+//         "service_0474nz8", // Service ID
+//         "template_t35ib3u", // Template ID
+//         {
+//           name: formData.name,
+//           message: `
+// Email: ${formData.email}
+// Phone: ${formData.phone}
+
+// Message:
+// ${formData.message}
+//           `,
+//           time: new Date().toLocaleString(),
+//         },
+//         "HDDgjsUuDFFjTZN5h" // Public Key
+//       );
+
+//       /* 🔹 3. Success */
+//       toast.success("Message sent successfully!", {
+//         position: "top-right",
+//         autoClose: 3000,
+//       });
+
+//       trackEvent("contact_form_submit", {
+//         name: formData.name,
+//         email: formData.email,
+//         phone: formData.phone,
+//       });
+
+//       setFormData({
+//         name: "",
+//         email: "",
+//         phone: "",
+//         message: "",
+//       });
+//       setErrors({});
+//     } catch (error) {
+//       console.error("Contact Error:", error);
+//       toast.error("Error sending message.", {
+//         position: "top-right",
+//         autoClose: 3000,
+//       });
+//     }
+//   };
+
+//   return (
+//     <>
+//       <div className="min-h-screen bg-black text-white flex flex-col items-center py-16 px-6 md:px-16 border-b-4 border-orange-500">
+//         <h1 className="text-5xl font-extrabold mb-12 text-orange-500">
+//           Contact Us
+//         </h1>
+
+//         <div className="w-full max-w-7xl flex flex-col md:flex-row gap-16">
+//           {/* Left Side */}
+//           <div className="md:w-1/2 space-y-8">
+//             <h2 className="text-3xl font-bold border-b-4 border-orange-500 pb-2 mb-6">
+//               Company Details
+//             </h2>
+
+//             <p className="text-gray-300 leading-relaxed">
+//               ThinkBiz Hightech Private Limited is a leading company specialising
+//               in comprehensive digital solutions.
+//             </p>
+
+//             <div className="flex items-center space-x-3">
+//               <FaPhoneAlt className="text-orange-500" />
+//               <a href="tel:+918512001218">+91 85120 01218</a>
+//             </div>
+
+//             <div className="flex items-center space-x-3">
+//               <FaEnvelope className="text-orange-500" />
+//               <a href="mailto:info@thinkbizhightech.com">
+//                 info@thinkbizhightech.com
+//               </a>
+//             </div>
+
+//             <div className="flex items-center space-x-3">
+//               <FaMapMarkerAlt className="text-orange-500" />
+//               <p>Noida, Uttar Pradesh, India</p>
+//             </div>
+
+//             <div className="flex space-x-6 mt-6">
+//               <FaFacebookF size={24} />
+//               <FaWhatsapp size={24} />
+//               <FaLinkedinIn size={24} />
+//               <FaInstagram size={24} />
+//             </div>
+//           </div>
+
+//           {/* Right Side: Form */}
+//           <div className="md:w-1/2 bg-white rounded-xl p-8 shadow-lg">
+//             <h2 className="text-3xl font-bold mb-6 text-orange-500">
+//               Reach Out to Our Team
+//             </h2>
+
+//             <form onSubmit={handleSubmit} noValidate>
+//               {/* Name */}
+//               <input
+//                 name="name"
+//                 value={formData.name}
+//                 onChange={handleChange}
+//                 placeholder="Your full name"
+//                 className="w-full mb-4 px-4 py-2 text-black border rounded"
+//               />
+//               {errors.name && (
+//                 <p className="text-red-500 text-sm">{errors.name}</p>
+//               )}
+
+//               {/* Email */}
+//               <input
+//                 name="email"
+//                 value={formData.email}
+//                 onChange={handleChange}
+//                 placeholder="example@mail.com"
+//                 className="w-full mb-4 px-4 py-2 text-black border rounded"
+//               />
+//               {errors.email && (
+//                 <p className="text-red-500 text-sm">{errors.email}</p>
+//               )}
+
+//               {/* Phone */}
+//               <input
+//                 name="phone"
+//                 value={formData.phone}
+//                 onChange={handleChange}
+//                 placeholder="10-digit mobile number"
+//                 className="w-full mb-4 px-4 py-2 text-black border rounded"
+//               />
+//               {errors.phone && (
+//                 <p className="text-red-500 text-sm">{errors.phone}</p>
+//               )}
+
+//               {/* Message */}
+//               <textarea
+//                 name="message"
+//                 value={formData.message}
+//                 onChange={handleChange}
+//                 placeholder="Write your message here..."
+//                 className="w-full mb-4 px-4 py-2 text-black border rounded"
+//               />
+//               {errors.message && (
+//                 <p className="text-red-500 text-sm">{errors.message}</p>
+//               )}
+
+//               <button
+//                 type="submit"
+//                 className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg"
+//               >
+//                 Send Message
+//               </button>
+//             </form>
+//           </div>
+//         </div>
+
+//         <ToastContainer />
+//       </div>
+
+//       <WhatsAppButton />
+//       <Newsletter />
+//     </>
+//   );
+// };
+
+// export default Contact;
 import React, { useState } from "react";
 import {
   FaFacebookF,
@@ -12,11 +247,12 @@ import {
 import { db } from "../firebase";
 import { ref, push } from "firebase/database";
 
+import emailjs from "@emailjs/browser";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Newsletter from "../assets/Component/NewsLetterbox";
 import WhatsAppButton from "../assets/Component/WhatsAppButton";
-import { Helmet } from 'react-helmet-async';
 
 import { trackEvent } from "../trackEvent";
 
@@ -40,8 +276,11 @@ const Contact = () => {
   const validate = () => {
     let tempErrors = {};
     if (!formData.name.trim()) tempErrors.name = "Name is required";
+
     if (!formData.email.trim()) tempErrors.email = "Email is required";
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email))
+    else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+    )
       tempErrors.email = "Invalid email address";
 
     if (!formData.phone.trim()) tempErrors.phone = "Phone number is required";
@@ -55,57 +294,67 @@ const Contact = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
+    if (!validate()) return;
+
+    try {
+      /* 1️⃣ Save to Firebase */
       const contactRef = ref(db, "contacts");
-      push(contactRef, formData)
-        .then(() => {
-          toast.success("Message sent successfully!", {
-            position: "top-right",
-            autoClose: 3000,
-          });
+      await push(contactRef, formData);
 
-          // Track event here
-          trackEvent("contact_form_submit", {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-          });
+      /* 2️⃣ Send Email using EmailJS (FREE) */
+      await emailjs.send(
+        "service_0474nz8", // Service ID
+        "template_t35ib3u", // Template ID
+        {
+          name: formData.name,
+          message: `
+Email: ${formData.email}
+Phone: ${formData.phone}
 
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-          });
-          setErrors({});
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error("Error sending message.", {
-            position: "top-right",
-            autoClose: 3000,
-          });
-        });
+Message:
+${formData.message}
+          `,
+          time: new Date().toLocaleString(),
+        },
+        "HDDgjsUuDFFjTZN5h" // Public Key
+      );
+
+      toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      trackEvent("contact_form_submit", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      setErrors({});
+    } catch (error) {
+      console.error("Contact Error:", error);
+      toast.error("Error sending message.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
   return (
     <>
       <div className="min-h-screen bg-black text-white flex flex-col items-center py-16 px-6 md:px-16 border-b-4 border-orange-500">
-        <Helmet>
-                <title>Contact Us- ThinkBizHighTech
-
-        </title>
-         <meta
-              name="Description"
-              content="Contact us for all your IT needs! We are a leading IT company in Noida, delivering top-notch solutions with expertise and reliability."
-            />
-            </Helmet>
         <h1 className="text-5xl font-extrabold mb-12 text-orange-500">
           Contact Us
         </h1>
+
         <div className="w-full max-w-7xl flex flex-col md:flex-row gap-16">
           {/* Left Side: Company Info */}
           <div className="md:w-1/2 space-y-8">
@@ -191,9 +440,7 @@ const Contact = () => {
               </a>
             </div>
           </div>
-
-          {/* Right Side: Contact Form */}
-          <div className="md:w-1/2 bg-white rounded-xl p-8 shadow-lg">
+<div className="md:w-1/2 bg-white rounded-xl p-8 shadow-lg">
             <h2 className="text-3xl font-bold mb-6 text-orange-500">
               Reach Out to Our Team
             </h2>
@@ -299,8 +546,11 @@ const Contact = () => {
             </form>
           </div>
         </div>
+          
+
         <ToastContainer />
       </div>
+
       <WhatsAppButton />
       <Newsletter />
     </>

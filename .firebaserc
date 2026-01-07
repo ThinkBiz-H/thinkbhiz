@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "ankurm-foundation"
-  }
+    "default": "thinkbiz-website"
+  },
+  "targets": {},
+  "etags": {}
 }
