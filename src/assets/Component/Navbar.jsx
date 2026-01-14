@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { trackEvent } from "../../trackEvent";
 import { ChevronDown, MessageCircle } from "lucide-react";
 
 const Navbar = () => {
+  const location = useLocation(); // ✅ IMPORTANT
   const [open, setOpen] = useState(false);
-  const [disableHover, setDisableHover] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const closeMobileMenu = () => {
@@ -14,7 +14,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white text-black px-6">
+    <nav
+      key={location.pathname} // ✅ MAIN FIX
+      className="bg-white text-black px-6"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/" onClick={() => trackEvent("navbar_logo_click")}>
@@ -39,52 +42,48 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* Services Dropdown */}
+          {/* ===== SERVICES (DESKTOP HOVER) ===== */}
           <li className="relative group cursor-pointer hover:text-black">
-  <span className="inline-flex items-center gap-1">
-    Services
-  </span>
+            <span className="inline-flex items-center gap-1">
+              Services
+            </span>
 
-  <ul
-    className="
-      absolute left-0 top-full mt-3
-      bg-white text-black
-      shadow-xl rounded-xl p-3
-      w-64
-      opacity-0 invisible
-      group-hover:opacity-100 group-hover:visible
-      transition-all duration-200
-      z-50
-    "
-  >
-    {[
-      ["Website Design & Development", "/service/web"],
-      ["Android & iOS App Development", "/service/app"],
-      ["Digital Marketing", "/service/digital-marketing"],
-      ["SEO Services", "/service/seo"],
-      ["Software Development", "/service/software"],
-      ["AI Automation", "/service/ai-automation"],
-      ["Email Marketing", "/service/email"],
-      ["Brand Promotion", "/service/brand"],
-    ].map(([label, path]) => (
-      <li key={label}>
-        <Link
-          to={path}
-          onClick={() =>
-            trackEvent("navbar_service", { service: label })
-          }
-          className="
-            block px-3 py-2 rounded-lg
-            hover:bg-gray-100
-            transition
-          "
-        >
-          {label}
-        </Link>
-      </li>
-    ))}
-  </ul>
-</li>
+            <ul
+              className="
+                absolute left-0 top-full mt-3
+                bg-white text-black
+                shadow-xl rounded-xl p-3
+                w-64
+                opacity-0 invisible
+                group-hover:opacity-100 group-hover:visible
+                transition-all duration-200
+                z-50
+              "
+            >
+              {[
+                ["Website Design & Development", "/service/web"],
+                ["Android & iOS App Development", "/service/app"],
+                ["Digital Marketing", "/service/digital-marketing"],
+                ["SEO Services", "/service/seo"],
+                ["Software Development", "/service/software"],
+                ["AI Automation", "/service/ai-automation"],
+                ["Email Marketing", "/service/email"],
+                ["Brand Promotion", "/service/brand"],
+              ].map(([label, path]) => (
+                <li key={label}>
+                  <Link
+                    to={path}
+                    onClick={() =>
+                      trackEvent("navbar_service", { service: label })
+                    }
+                    className="block px-3 py-2 rounded-lg hover:bg-gray-100 transition"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
 
           {[
             ["Industries", "/industries"],
@@ -151,7 +150,7 @@ const Navbar = () => {
               </li>
             ))}
 
-            {/* MOBILE SERVICES */}
+            {/* ===== SERVICES (MOBILE CLICK) ===== */}
             <li className="w-full text-center">
               <button
                 onClick={() =>
