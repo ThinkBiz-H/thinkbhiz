@@ -522,7 +522,7 @@ const Navbar = () => {
           {[
             ["Industries", "/industries"],
             ["Pricing", "/pricing"],
-            ["Blog", "/blog"],
+            // ["Blog", "/blog"],
             ["Contact", "/contact"],
           ].map(([label, path]) => (
             <li key={label} className="hover:text-black">
@@ -646,7 +646,7 @@ const Navbar = () => {
             {[
               ["Industries", "/industries"],
               ["Pricing", "/pricing"],
-              ["Blog", "/blog"],
+              // ["Blog", "/blog"],
               ["Contact", "/contact"],
             ].map(([label, path]) => (
               <li key={label}>
