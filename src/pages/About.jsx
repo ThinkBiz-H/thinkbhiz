@@ -214,7 +214,7 @@ const About = () => {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl text-center font-bold text-[#ff7515] mb-12">
-            Why Choose ThinkBhiz?
+            Why Choose ThinkBiz?
           </h2>
 
           <div className="grid md:grid-cols-4 gap-10">
