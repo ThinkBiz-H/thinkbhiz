@@ -575,65 +575,90 @@ const Industries = () => {
 
     {/* ================= MODAL (UNCHANGED, CLEAN) ================= */}
     {selected && selectedIndustry && (
-      <div className="fixed inset-0 bg-black/80 backdrop-blur flex items-center justify-center p-4 z-50">
-        <div className="bg-white w-full max-w-4xl p-8 rounded-2xl shadow-2xl relative text-gray-900">
-          <button
-            onClick={handleCloseModal}
-            className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-black"
-          >
-            ×
-          </button>
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50 overflow-auto"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          <div className="bg-white w-full max-w-4xl p-6 md:p-8 rounded-2xl shadow-2xl relative text-gray-900 min-h-[80vh] md:min-h-auto max-h-[90vh] md:max-h-none overflow-y-auto">
+            {/* CLOSE BUTTON - now properly inside modal */}
+            <button
+              onClick={handleCloseModal}
+              className="
+        absolute top-4 right-4 
+        text-gray-500 hover:text-black 
+        bg-white rounded-full 
+        w-10 h-10 
+        flex items-center justify-center 
+        text-3xl 
+        shadow-md
+        transition
+        hover:scale-110
+        active:scale-95
+        focus:outline-none
+        focus:ring-2
+        focus:ring-orange-500
+      "
+              aria-label="Close modal"
+            >
+              ×
+            </button>
+            {/* FLEX CONTAINER */}
+            <div className="flex flex-col md:flex-row gap-8 md:gap-10 mt-10">
+              {/* LEFT SIDE */}
+              <div className="w-full md:w-1/2 flex flex-col items-center">
+                <img
+                  src={selectedIndustry.image}
+                  alt={selectedIndustry.title}
+                  className="rounded-xl shadow-lg w-full object-cover mb-6 max-h-[250px] md:max-h-none"
+                />
 
-          <div className="grid md:grid-cols-2 gap-10 mt-6">
-            <div>
-              <img
-                src={selectedIndustry.image}
-                alt={selectedIndustry.title}
-                className="rounded-xl shadow-lg w-full mb-6"
-              />
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 w-full text-center md:text-left">
+                  FEATURES
+                </h3>
 
-              <h3 className="text-2xl font-bold mb-3">Key Features</h3>
-              <ul className="list-disc list-inside space-y-2">
-                {selectedIndustry.points.map((p, i) => (
-                  <li key={i} className="text-lg">{p}</li>
-                ))}
-              </ul>
-            </div>
+                <ul className="text-left text-gray-800 mb-6 list-disc list-inside space-y-2 w-full max-w-md mx-auto md:mx-0">
+                  {selectedIndustry.points.map((point, index) => (
+                    <li key={index} className="text-lg font-medium">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
 
-            <div>
-              <p className="text-orange-500 font-semibold mb-2">
-                INDUSTRY: {selectedIndustry.title.toUpperCase()}
-              </p>
+                <div className="flex gap-4 justify-center md:justify-start">
+                  <button
+                    onClick={handleCloseModal}
+                    className="bg-[#ff7515] text-white font-semibold px-8 py-3 rounded-full hover:bg-black transition"
+                  >
+                    Industries
+                  </button>
 
-              <h2 className="text-3xl font-bold mb-6">
-                {selectedIndustry.heading}
-              </h2>
+                  <a
+                    href="/contact"
+                    className="bg-black text-white font-semibold px-8 py-3 rounded-full hover:bg-[#ff7515] transition"
+                  >
+                    Free Consultation
+                  </a>
+                </div>
+              </div>
 
-              <p className="text-lg leading-relaxed mb-8">
-                {selectedIndustry.text}
-              </p>
+              {/* RIGHT SIDE */}
+              <div className="w-full md:w-1/2 text-gray-700">
+                <p className="text-2xl font-semibold text-[#ff7515] tracking-wide mb-2 text-center md:text-left">
+                  INDUSTRY: {selectedIndustry.title.toUpperCase()}
+                </p>
 
-              <div className="flex gap-4">
-                <button
-                  onClick={handleCloseModal}
-                  className="bg-[#ff7515] text-white px-6 py-3 rounded-full hover:bg-black transition"
-                >
-                  Back to Industries
-                </button>
+                <h2 className="text-4xl font-bold mb-6 leading-tight text-center md:text-left">
+                  {selectedIndustry.heading}
+                </h2>
 
-                <a
-                  href="/contact"
-                  className="bg-black text-white px-6 py-3 rounded-full hover:bg-[#ff7515] transition"
-                >
-                  Free Consultation
-                </a>
+                <p className="text-lg leading-relaxed whitespace-pre-line text-center md:text-left">
+                  {selectedIndustry.text}
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    )}
-    <WhatsAppButton />
+      )}    <WhatsAppButton />
       <Newsletter />
       <div className="w-full h-px bg-[#ff7515] opacity-90 my-16" />
   </div>
