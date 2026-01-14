@@ -43,6 +43,7 @@ const Blog = () => {
                     content="ThinkBizHighTech is the leading IT company in India, Which provides all IT Services like Website Design & Development, Digital Marketing and others.
 "
                   />
+                    <link rel="canonical" href="https://www.thinkbizhightech.com/" />
                   </Helmet>
       <h1 className="text-5xl font-extrabold mb-12 text-orange-500 text-center">
         Our Blog

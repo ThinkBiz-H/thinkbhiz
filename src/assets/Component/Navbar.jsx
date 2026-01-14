@@ -4,6 +4,7 @@ import { trackEvent } from "../../trackEvent";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [disableHover, setDisableHover] = useState(false);
 
   return (
     <nav className="bg-white text-black py-0 px-6">
@@ -36,111 +37,123 @@ const Navbar = () => {
           </li>
 
           {/* Service Dropdown */}
-          <li className="group cursor-pointer hover:text-black relative">
-            Services
-            <ul
-              className="
-              absolute left-0 top-8 
-              bg-white text-black shadow-lg rounded-lg p-4 
-              w-58 
-              opacity-0 invisible 
-              group-hover:opacity-100 group-hover:visible 
-              transition-all duration-300 z-50
-            "
-            >
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/web"
-                  onClick={() =>
-                    trackEvent("navbar_service", { service: "Web Development" })
-                  }
-                >
-                  Website Design & Development
-                </Link>
-              </li>
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/app"
-                  onClick={() =>
-                    trackEvent("navbar_service", { service: "App Development" })
-                  }
-                >
-                  Android & iOS App Development
-                </Link>
-              </li>
+<li
+  className={`cursor-pointer hover:text-black relative ${
+    disableHover ? "" : "group"
+  }`}
+  onMouseLeave={() => setDisableHover(false)} // ✅ mouse hata → hover allow
+>
+  Services
 
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/digital-marketing"
-                  onClick={() =>
-                    trackEvent("navbar_service", {
-                      service: "Digital Marketing",
-                    })
-                  }
-                >
-                  Digital Marketing
-                </Link>
-              </li>
+  <ul
+    className="
+      absolute left-0 top-8 
+      bg-white text-black shadow-lg rounded-lg p-4 
+      w-58 
+      opacity-0 invisible 
+      group-hover:opacity-100 group-hover:visible 
+      transition-all duration-300 z-50
+    "
+  >
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/web"
+        onClick={() => {
+          setDisableHover(true); // 🔥 bas itna
+          trackEvent("navbar_service", { service: "Web Development" });
+        }}
+      >
+        Website Design & Development
+      </Link>
+    </li>
 
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/seo"
-                  onClick={() =>
-                    trackEvent("navbar_service", { service: "SEO Services" })
-                  }
-                >
-                  SEO Services
-                </Link>
-              </li>
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/app"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "App Development" });
+        }}
+      >
+        Android & iOS App Development
+      </Link>
+    </li>
 
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/software"
-                  onClick={() =>
-                    trackEvent("navbar_service", {
-                      service: "Software Development",
-                    })
-                  }
-                >
-                  Software Development
-                </Link>
-              </li>
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/ai-automation"
-                  onClick={() =>
-                    trackEvent("navbar_service", {
-                      service: "AI Automation",
-                    })
-                  }
-                >
-                  AI Automation
-                </Link>
-              </li>
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/email"
-                  onClick={() =>
-                    trackEvent("navbar_service", { service: "Email Marketing" })
-                  }
-                >
-                  Email Marketing
-                </Link>
-              </li>
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/digital-marketing"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "Digital Marketing" });
+        }}
+      >
+        Digital Marketing
+      </Link>
+    </li>
 
-              <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
-                <Link
-                  to="/service/brand"
-                  onClick={() =>
-                    trackEvent("navbar_service", { service: "Brand Promotion" })
-                  }
-                >
-                  Brand Promotion
-                </Link>
-              </li>
-            </ul>
-          </li>
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/seo"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "SEO Services" });
+        }}
+      >
+        SEO Services
+      </Link>
+    </li>
 
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/software"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", {
+            service: "Software Development",
+          });
+        }}
+      >
+        Software Development
+      </Link>
+    </li>
+
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/ai-automation"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "AI Automation" });
+        }}
+      >
+        AI Automation
+      </Link>
+    </li>
+
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/email"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "Email Marketing" });
+        }}
+      >
+        Email Marketing
+      </Link>
+    </li>
+
+    <li className="py-2 px-2 hover:bg-gray-100 rounded-md">
+      <Link
+        to="/service/brand"
+        onClick={() => {
+          setDisableHover(true);
+          trackEvent("navbar_service", { service: "Brand Promotion" });
+        }}
+      >
+        Brand Promotion
+      </Link>
+    </li>
+  </ul>
+</li>
           <li className="cursor-pointer hover:text-black">
             <Link
               to="/industries"

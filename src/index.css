@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@keyframes slide-right-to-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.tech-slider-once {
+  display: flex;
+  width: max-content;
+  animation: slide-right-to-left 12s linear forwards;
+}

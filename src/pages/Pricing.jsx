@@ -777,7 +777,7 @@ const Pricing = () => {
             name="Description"
             content="Explore our flexible service Pricing designed to fit your business needs, budget, and goals with transparent pricing and expert support."
           />
-              
+                <link rel="canonical" href="https://www.thinkbizhightech.com/" />
             </Helmet>
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-5xl font-extrabold mb-12 text-orange-500">

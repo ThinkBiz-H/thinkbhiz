@@ -29,6 +29,7 @@ const About = () => {
       name="Description"
       content="ThinkBizHighTech – We are a leading IT company in Noida, Which provides all the IT services."
     />
+      <link rel="canonical" href="https://www.thinkbizhightech.com/" />
         
       </Helmet>
       {/* ================= HERO ================= */}
