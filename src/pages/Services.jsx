@@ -552,7 +552,7 @@ const Services = () => {
   rel="noopener noreferrer"
   className="block"
 >
-  <div className="bg-[#0d0f13] border border-gray-800 rounded-xl p-10 text-center flex flex-col items-center justify-center cursor-pointer hover:border-green-500 transition">
+  <div className="bg-[#696969] border border-gray-800 rounded-xl p-10 text-center flex flex-col items-center justify-center cursor-pointer hover:border-green-500 transition">
     <div className="text-green-500 text-3xl mb-4">
       📞
     </div>
@@ -570,7 +570,7 @@ const Services = () => {
   href="mailto:info@thinkbizhightech.com"
   className="block"
 >
-  <div className="bg-[#0d0f13] border border-gray-800 rounded-xl p-10 text-center flex flex-col items-center justify-center cursor-pointer hover:border-[#ff7515] transition">
+  <div className="bg-[#696969] border border-gray-800 rounded-xl p-10 text-center flex flex-col items-center justify-center cursor-pointer hover:border-[#ff7515] transition">
     <div className="text-[#ff7515] text-3xl mb-4">
       ✉
     </div>
