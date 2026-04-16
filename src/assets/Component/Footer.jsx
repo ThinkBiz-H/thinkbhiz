@@ -218,15 +218,40 @@ const Footer = () => {
             {" "}
             <h3 className="text-xl font-bold mb-4 text-[#ff7515]">
               {" "}
-              Industries{" "}
+              Country{" "}
             </h3>{" "}
             <ul className="space-y-2 text-gray-300">
               {" "}
-              <li>E-Commerce</li> <li>Technology & SaaS</li>{" "}
-              <li>Education & Training</li> <li>Healthcare & Wellness</li>{" "}
+              <li>
+                <a
+                  href="https://thinkbizhightech.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500"
+                >
+                  India
+                </a>
+              </li>
+              <li>
+                <Link
+                  to="/digital-marketing-agency-in-Australia"
+                  className="hover:text-orange-500"
+                >
+                  Australia
+                </Link>
+              </li>{" "}
+              <li>
+                <Link
+                  to="https://uae.thinkbizhightech.com/"
+                  className="hover:text-orange-500"
+                >
+                  UAE
+                </Link>
+              </li>{" "}
+              {/* <li>Education & Training</li> <li>Healthcare & Wellness</li>{" "}
               <li>Real Estate</li> <li>Finance & Banking</li>{" "}
               <li>Automobile Industry</li> <li>Hospitality & Restaurants</li>
-              <li>Interior Design</li>{" "}
+              <li>Interior Design</li>{" "} */}
             </ul>{" "}
           </div>{" "}
           <div>
@@ -241,25 +266,19 @@ const Footer = () => {
             </p>{" "}
             {/* Address */}{" "}
             <div className="flex items-start gap-3 text-gray-300 mt-3">
-              {" "}
-              <FaMapMarkerAlt size={25} className="text-[#ff7515] mt-1" />{" "}
+              <FaMapMarkerAlt className="text-[#ff7515] w-5 h-5 mt-1 flex-shrink-0" />
               <p>
-                {" "}
-                B-46, B Block, Sector 63, Noida, Uttar Pradesh 201301, India{" "}
-              </p>{" "}
-            </div>{" "}
-            {/* Phone */}{" "}
+                B-46, B Block, Sector 63, Noida, Uttar Pradesh 201301, India
+              </p>
+            </div>
             <div className="flex items-center gap-3 text-gray-300 mt-3">
-              {" "}
-              <FaPhoneAlt size={20} className="text-[#ff7515]" />{" "}
-              <p>+91 85120 01218</p>{" "}
-            </div>{" "}
-            {/* Email */}{" "}
+              <FaPhoneAlt className="text-[#ff7515] w-5 h-5 flex-shrink-0" />
+              <p>+91 85120 01218</p>
+            </div>
             <div className="flex items-center gap-3 text-gray-300 mt-3">
-              {" "}
-              <FaEnvelope size={20} className="text-[#ff7515]" />{" "}
-              <p>info@thinkbizhightech.com</p>{" "}
-            </div>{" "}
+              <FaEnvelope className="text-[#ff7515] w-5 h-5 flex-shrink-0" />
+              <p>info@thinkbizhightech.com</p>
+            </div>
             {/* 🔥 SOCIAL ICONS SAME RAHENGE */}{" "}
             <div className="flex gap-4 mt-5 text-white">
               {" "}
@@ -306,7 +325,6 @@ const Footer = () => {
           © {new Date().getFullYear()} ThinkBiz High Tech Pvt. Ltd. | All Rights
           Reserved{" "}
         </p>{" "}
-        
       </div>{" "}
     </footer>
   );

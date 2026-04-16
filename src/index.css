@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @keyframes slide-right-to-left {
   0% {
     transform: translateX(100%);
@@ -12,4 +13,60 @@
   display: flex;
   width: max-content;
   animation: slide-right-to-left 12s linear forwards;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #333;
+}
+
+.swiper-pagination-bullet {
+  background: #999;
+}
+
+.swiper-pagination-bullet-active {
+  background: #000;
+}
+.swiper-button-prev {
+  display: none !important;
+}
+
+/* ✅ Style RIGHT arrow */
+.swiper-button-next {
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next::after {
+  font-size: 16px;
+  color: #2f3e8f;
+  font-weight: bold;
+}
+.prose ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.prose li {
+  margin-bottom: 6px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  transform: scale(1.5); /* 🔥 size bada */
+  cursor: pointer;
+}
+.prose a {
+  color: #60a5fa !important; /* 🔥 blue-400 */
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #3b82f6 !important; /* 🔥 blue-500 */
 }

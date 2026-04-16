@@ -1,61 +1,462 @@
+// import React, { useState, useEffect } from "react";
+// import { db } from "../../firebase";
+// import { ref as dbRef, get, child, remove, push, set } from "firebase/database";
+// import ReactQuill from "react-quill";
+// import "react-quill/dist/quill.snow.css";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// const AdminBlogForm = () => {
+//   const [blogs, setBlogs] = useState([]);
+//   const [imageFile, setImageFile] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [editId, setEditId] = useState(null);
+
+//   const modules = {
+//     toolbar: [
+//       [{ header: [1, 2, 3, 4, 5, 6, false] }],
+//       ["bold", "italic", "underline"],
+//       [{ list: "ordered" }, { list: "bullet" }],
+//       ["link", "image"],
+//       ["clean"],
+//     ],
+//   };
+
+//   // ✅ FIX: image field add
+//   const [newBlog, setNewBlog] = useState({
+//     title: "",
+//     content: "",
+//     date: "",
+//     metaTitle: "",
+//     metaDescription: "",
+//     imageAlt: "",
+//     image: "", // 🔥 IMPORTANT
+//   });
+
+//   const fetchBlogs = async () => {
+//     const snapshot = await get(child(dbRef(db), "blogs"));
+//     if (snapshot.exists()) {
+//       const data = snapshot.val();
+//       const blogsArray = Object.entries(data).map(([key, value]) => ({
+//         id: key,
+//         ...value,
+//       }));
+//       setBlogs(blogsArray);
+//     }
+//   };
+
+//   const deleteBlog = async (id) => {
+//     await remove(dbRef(db, "blogs/" + id));
+//     fetchBlogs();
+//     toast.success("Blog deleted 🗑️");
+//   };
+
+//   // 🔥 CLOUDINARY
+//   const uploadImage = async () => {
+//     if (!imageFile) return "";
+
+//     const formData = new FormData();
+//     formData.append("file", imageFile);
+//     formData.append("upload_preset", "blog_upload1");
+//     formData.append("cloud_name", "dcotvv2ek");
+
+//     const res = await fetch(
+//       "https://api.cloudinary.com/v1_1/dcotvv2ek/image/upload",
+//       {
+//         method: "POST",
+//         body: formData,
+//       },
+//     );
+
+//     const data = await res.json();
+//     return data.secure_url;
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (
+//       !newBlog.title ||
+//       !newBlog.content ||
+//       !newBlog.date ||
+//       !newBlog.metaTitle ||
+//       !newBlog.metaDescription ||
+//       !newBlog.imageAlt ||
+//       (!imageFile && !editId)
+//     ) {
+//       alert("All fields required");
+//       return;
+//     }
+
+//     try {
+//       setLoading(true);
+
+//       let imageURL = newBlog.image || "";
+
+//       // ✅ upload only if new image selected
+//       if (imageFile) {
+//         imageURL = await uploadImage();
+//       }
+
+//       if (!imageURL) {
+//         alert("Image required");
+//         return;
+//       }
+
+//       const slug = newBlog.title
+//         .toLowerCase()
+//         .replace(/[^a-z0-9 ]/g, "")
+//         .replace(/\s+/g, "-");
+
+//       if (editId) {
+//         await set(dbRef(db, "blogs/" + editId), {
+//           ...newBlog,
+//           image: imageURL,
+//           slug,
+//         });
+
+//         alert("Blog updated!");
+//       } else {
+//         await push(dbRef(db, "blogs"), {
+//           ...newBlog,
+//           image: imageURL,
+//           slug,
+//         });
+
+//         alert("Blog uploaded!");
+//       }
+
+//       // reset
+//       setNewBlog({
+//         title: "",
+//         content: "",
+//         date: "",
+//         metaTitle: "",
+//         metaDescription: "",
+//         imageAlt: "",
+//         image: "",
+//       });
+
+//       setImageFile(null);
+//       setEditId(null);
+//       fetchBlogs();
+//     } catch (err) {
+//       alert(err.message);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchBlogs();
+//   }, []);
+
+//   return (
+//     <div className="max-w-5xl mx-auto p-6">
+//       <h2 className="text-3xl text-orange-500 text-center mb-6">
+//         {editId ? "Edit Blog" : "Upload Blog"}
+//       </h2>
+
+//       <form
+//         onSubmit={handleSubmit}
+//         className="space-y-4 bg-gray-900 p-6 rounded"
+//       >
+//         <input
+//           type="text"
+//           placeholder="Title"
+//           value={newBlog.title}
+//           onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+//           className="w-full p-3 bg-gray-800 text-white"
+//         />
+
+//         {/* IMAGE */}
+//         <div className="space-y-2">
+//           <label className="block text-sm font-semibold text-gray-300">
+//             Upload Image
+//           </label>
+
+//           <label className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700 transition">
+//             <span className="text-gray-400">
+//               {imageFile ? imageFile.name : "Click to upload image"}
+//             </span>
+
+//             <input
+//               type="file"
+//               accept="image/*"
+//               onChange={(e) => setImageFile(e.target.files[0])}
+//               className="hidden"
+//             />
+//           </label>
+
+//           {/* 🔥 Preview */}
+//           {imageFile && (
+//             <img
+//               src={URL.createObjectURL(imageFile)}
+//               alt="preview"
+//               className="w-40 h-24 object-cover rounded"
+//             />
+//           )}
+
+//           {/* Old image preview (edit mode) */}
+//           {!imageFile && newBlog.image && (
+//             <img
+//               src={newBlog.image}
+//               alt="old"
+//               className="w-40 h-24 object-cover rounded"
+//             />
+//           )}
+//         </div>
+
+//         <input
+//           type="text"
+//           placeholder="Image Alt Text"
+//           value={newBlog.imageAlt}
+//           onChange={(e) => setNewBlog({ ...newBlog, imageAlt: e.target.value })}
+//           className="w-full p-3 bg-gray-800 text-white"
+//         />
+
+//         <input
+//           type="text"
+//           placeholder="Meta Title"
+//           value={newBlog.metaTitle}
+//           onChange={(e) =>
+//             setNewBlog({ ...newBlog, metaTitle: e.target.value })
+//           }
+//           className="w-full p-3 bg-gray-800 text-white"
+//         />
+
+//         <textarea
+//           placeholder="Meta Description"
+//           value={newBlog.metaDescription}
+//           onChange={(e) =>
+//             setNewBlog({
+//               ...newBlog,
+//               metaDescription: e.target.value,
+//             })
+//           }
+//           className="w-full p-3 bg-gray-800 text-white"
+//         />
+
+//         <div className="bg-white text-black rounded">
+//           <ReactQuill
+//             key={editId || "new"} // 🔥 IMPORTANT FIX
+//             theme="snow"
+//             value={newBlog.content}
+//             onChange={(value) => setNewBlog({ ...newBlog, content: value })}
+//             modules={modules}
+//           />
+//         </div>
+
+//         <input
+//           type="date"
+//           value={newBlog.date}
+//           onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })}
+//           className="w-full p-3 bg-gray-800 text-white"
+//         />
+
+//         <button className="w-full bg-orange-500 py-3 font-bold">
+//           {loading ? "Saving..." : editId ? "Update Blog" : "Upload Blog"}
+//         </button>
+//       </form>
+
+//       {/* LIST */}
+//       <div className="mt-8 space-y-4">
+//         {blogs.map((b) => (
+//           <div key={b.id} className="bg-gray-800 p-4 flex justify-between">
+//             <div className="flex gap-4">
+//               <img src={b.image} className="w-16 h-16 object-cover" />
+//               <div>
+//                 <h3>{b.title}</h3>
+//                 <p className="text-sm text-gray-400">
+//                   {new Date(b.date).toLocaleDateString()}
+//                 </p>
+//               </div>
+//             </div>
+
+//             <div className="flex gap-2">
+//               {/* ✅ FIXED EDIT */}
+//               <button
+//                 onClick={() => {
+//                   setNewBlog({
+//                     title: b.title || "",
+//                     content: b.content || "",
+//                     date: b.date || "",
+//                     metaTitle: b.metaTitle || "",
+//                     metaDescription: b.metaDescription || "",
+//                     imageAlt: b.imageAlt || "",
+//                     image: b.image || "",
+//                   });
+
+//                   setEditId(b.id);
+//                   setImageFile(null);
+//                 }}
+//                 className="bg-blue-500 px-3 py-1"
+//               >
+//                 Edit
+//               </button>
+
+//               <button
+//                 onClick={() => deleteBlog(b.id)}
+//                 className="bg-red-600 px-3 py-1"
+//               >
+//                 Delete
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//       <ToastContainer />
+//     </div>
+//   );
+// };
+
+// export default AdminBlogForm;
+
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { ref as dbRef, get, child, remove, push } from "firebase/database";
+import { ref as dbRef, get, child, remove, push, set } from "firebase/database";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { toast } from "react-toastify";
 
 const AdminBlogForm = () => {
   const [blogs, setBlogs] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [editId, setEditId] = useState(null);
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
 
   const [newBlog, setNewBlog] = useState({
     title: "",
     content: "",
     date: "",
+    metaTitle: "",
+    metaDescription: "",
+    imageAlt: "",
+    image: "",
   });
 
   const fetchBlogs = async () => {
-    const rootRef = dbRef(db);
-    try {
-      const snapshot = await get(child(rootRef, "blogs"));
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const blogsArray = Object.entries(data).map(([key, value]) => ({
-          id: key,
-          ...value,
-        }));
-        setBlogs(blogsArray);
-      } else {
-        setBlogs([]);
-      }
-    } catch (error) {
-      console.error("Error fetching blogs:", error);
+    const snapshot = await get(child(dbRef(db), "blogs"));
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const blogsArray = Object.entries(data).map(([key, value]) => ({
+        id: key,
+        ...value,
+      }));
+      setBlogs(blogsArray);
     }
   };
 
-  const deleteBlog = async (blogId) => {
-    try {
-      await remove(dbRef(db, "blogs/" + blogId));
-      alert("Blog deleted successfully");
-      fetchBlogs();
-    } catch (error) {
-      alert("Failed to delete blog: " + error.message);
-    }
+  // ✅ DELETE WITH CONFIRM
+  const deleteBlog = async (id) => {
+    if (!window.confirm("Are you sure to delete this blog?")) return;
+
+    await remove(dbRef(db, "blogs/" + id));
+    fetchBlogs();
+    toast.success("Blog deleted 🗑️");
+  };
+
+  const uploadImage = async () => {
+    if (!imageFile) return "";
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("upload_preset", "blog_upload1");
+    formData.append("cloud_name", "dcotvv2ek");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dcotvv2ek/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
+
+    const data = await res.json();
+    return data.secure_url;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { title, content, date } = newBlog;
-    if (!title.trim() || !content.trim() || !date) {
-      alert("Please fill all fields");
+    // ✅ VALIDATION
+    if (
+      !newBlog.title ||
+      !newBlog.content ||
+      !newBlog.date ||
+      !newBlog.metaTitle ||
+      !newBlog.metaDescription ||
+      !newBlog.imageAlt ||
+      (!imageFile && !editId)
+    ) {
+      toast.error("All fields required ⚠️");
       return;
     }
 
     try {
-      await push(dbRef(db, "blogs"), newBlog);
-      alert("Blog uploaded successfully!");
-      setNewBlog({ title: "", content: "", date: "" });
+      setLoading(true);
+
+      let imageURL = newBlog.image || "";
+
+      if (imageFile) {
+        imageURL = await uploadImage();
+      }
+
+      if (!imageURL) {
+        toast.error("Image required 🖼️");
+        return;
+      }
+
+      const slug = newBlog.title
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, "")
+        .replace(/\s+/g, "-");
+
+      if (editId) {
+        await set(dbRef(db, "blogs/" + editId), {
+          ...newBlog,
+          image: imageURL,
+          slug,
+        });
+
+        toast.success("Blog updated ✏️");
+      } else {
+        await push(dbRef(db, "blogs"), {
+          ...newBlog,
+          image: imageURL,
+          slug,
+        });
+
+        toast.success("Blog uploaded 🚀");
+      }
+
+      // RESET
+      setNewBlog({
+        title: "",
+        content: "",
+        date: "",
+        metaTitle: "",
+        metaDescription: "",
+        imageAlt: "",
+        image: "",
+      });
+
+      setImageFile(null);
+      setEditId(null);
       fetchBlogs();
-    } catch (error) {
-      alert("Failed to upload blog: " + error.message);
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,86 +466,160 @@ const AdminBlogForm = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h2 className="text-3xl font-extrabold mb-8 text-orange-500 text-center">
-        Manage Blogs
+      <h2 className="text-3xl text-orange-500 text-center mb-6">
+        {editId ? "Edit Blog" : "Upload Blog"}
       </h2>
 
-      {/* Blog Upload Form */}
+      {editId && (
+        <p className="text-yellow-400 text-center mb-2">
+          Editing blog (image optional)
+        </p>
+      )}
+
       <form
         onSubmit={handleSubmit}
-        className="mb-12 bg-gray-900 p-8 rounded-lg shadow-lg"
-        style={{ width: "100%" }}
+        className="space-y-4 bg-gray-900 p-6 rounded"
       >
-        <h3 className="text-2xl mb-6 font-semibold text-white text-center">
-          Upload New Blog
-        </h3>
+        <input
+          type="text"
+          placeholder="Title"
+          value={newBlog.title}
+          onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+          className="w-full p-3 bg-gray-800 text-white"
+        />
+
+        {/* IMAGE */}
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-gray-300">
+            Upload Image
+          </label>
+          <label className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700 transition">
+            <span className="text-gray-400">
+              {imageFile ? imageFile.name : "Click to upload image"}
+            </span>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              className="hidden"
+            />
+          </label>
+          {/* 🔥 Preview */}
+          {imageFile && (
+            <img
+              src={URL.createObjectURL(imageFile)}
+              alt="preview"
+              className="w-40 h-24 object-cover rounded"
+            />
+          )}
+          {/* Old image preview (edit mode) */}{" "}
+          {!imageFile && newBlog.image && (
+            <img
+              src={newBlog.image}
+              alt="old"
+              className="w-40 h-24 object-cover rounded"
+            />
+          )}
+        </div>
 
         <input
           type="text"
-          placeholder="Blog Title"
-          value={newBlog.title}
-          onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
-          className="w-full mb-6 p-4 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-          required
+          placeholder="Image Alt"
+          value={newBlog.imageAlt}
+          onChange={(e) => setNewBlog({ ...newBlog, imageAlt: e.target.value })}
+          className="w-full p-3 bg-gray-800 text-white"
+        />
+
+        <input
+          type="text"
+          placeholder="Meta Title"
+          value={newBlog.metaTitle}
+          onChange={(e) =>
+            setNewBlog({ ...newBlog, metaTitle: e.target.value })
+          }
+          className="w-full p-3 bg-gray-800 text-white"
         />
 
         <textarea
-          placeholder="Blog Content"
-          value={newBlog.content}
-          onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
-          className="w-full mb-6 p-4 rounded-md bg-gray-800 text-white placeholder-gray-400 resize-y min-h-[140px] focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-          rows={6}
-          required
-        ></textarea>
+          placeholder="Meta Description"
+          value={newBlog.metaDescription}
+          onChange={(e) =>
+            setNewBlog({
+              ...newBlog,
+              metaDescription: e.target.value,
+            })
+          }
+          className="w-full p-3 bg-gray-800 text-white"
+        />
+
+        <div className="bg-white text-black rounded">
+          <ReactQuill
+            key={editId || "new"}
+            theme="snow"
+            value={newBlog.content}
+            onChange={(value) => setNewBlog({ ...newBlog, content: value })}
+            modules={modules}
+          />
+        </div>
 
         <input
           type="date"
           value={newBlog.date}
           onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })}
-          className="w-full mb-6 p-4 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-          required
+          className="w-full p-3 bg-gray-800 text-white"
         />
 
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-yellow-400 hover:to-orange-500 text-gray-900 font-bold py-4 rounded-lg shadow-lg transition"
-        >
-          Upload Blog
+        <button className="w-full bg-orange-500 py-3 font-bold">
+          {loading ? "Saving..." : editId ? "Update Blog" : "Upload Blog"}
         </button>
       </form>
 
-      {/* Blog List */}
-      {blogs.length === 0 ? (
-        <p className="text-center text-gray-400 text-lg">No blogs found.</p>
-      ) : (
-        <ul className="space-y-6">
-          {blogs.map(({ id, title, date }) => (
-            <li
-              key={id}
-              className="bg-gray-800 p-6 rounded-lg flex justify-between items-center shadow-md"
-            >
+      {/* LIST */}
+      <div className="mt-8 space-y-4">
+        {blogs.map((b) => (
+          <div key={b.id} className="bg-gray-800 p-4 flex justify-between">
+            <div className="flex gap-4">
+              <img src={b.image} className="w-16 h-16 object-cover" />
               <div>
-                <h3 className="text-2xl font-semibold text-white">{title}</h3>
-                <p className="text-gray-400 mt-1 text-sm">
-                  {date ? new Date(date).toLocaleDateString() : "No date"}
+                <h3>{b.title}</h3>
+                <p className="text-sm text-gray-400">
+                  {new Date(b.date).toLocaleDateString()}
                 </p>
               </div>
+            </div>
+
+            <div className="flex gap-2">
               <button
                 onClick={() => {
-                  if (
-                    window.confirm("Are you sure you want to delete this blog?")
-                  ) {
-                    deleteBlog(id);
-                  }
+                  setNewBlog({
+                    title: b.title || "",
+                    content: b.content || "",
+                    date: b.date || "",
+                    metaTitle: b.metaTitle || "",
+                    metaDescription: b.metaDescription || "",
+                    imageAlt: b.imageAlt || "",
+                    image: b.image || "",
+                  });
+
+                  setEditId(b.id);
+                  setImageFile(null);
                 }}
-                className="bg-red-600 px-5 py-2 rounded-lg hover:bg-red-700 transition text-white font-semibold"
+                className="bg-blue-500 px-3 py-1"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => deleteBlog(b.id)}
+                className="bg-red-600 px-3 py-1"
               >
                 Delete
               </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

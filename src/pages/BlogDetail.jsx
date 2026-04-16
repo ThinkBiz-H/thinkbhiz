@@ -1,82 +1,75 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { db } from "../firebase";
 import { ref, get, child } from "firebase/database";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBlog = async () => {
-      try {
-        const dbRef = ref(db);
-        const snapshot = await get(child(dbRef, `blogs/${id}`));
-        if (snapshot.exists()) {
-          setBlog(snapshot.val());
-        } else {
-          setBlog(null);
-        }
-      } catch (error) {
-        console.error("Error fetching blog:", error);
-        setBlog(null);
-      } finally {
-        setLoading(false);
+      const snapshot = await get(child(ref(db), "blogs"));
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const blogsArray = Object.values(data);
+        const foundBlog = blogsArray.find((b) => b.slug === slug);
+        setBlog(foundBlog || null);
       }
     };
 
     fetchBlog();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4">
-        <p className="text-xl sm:text-2xl">Loading...</p>
-      </div>
-    );
-  }
+  }, [slug]);
 
   if (!blog) {
-    return (
-      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-white p-6 px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">
-          Blog not found
-        </h2>
-        <Link
-          to="/blog"
-          className="text-orange-500 hover:text-orange-600 underline text-lg sm:text-xl"
-        >
-          Back to Blog
-        </Link>
-      </div>
-    );
+    return <div className="text-white p-10 text-center">Blog not found</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-12 px-4 sm:px-6 md:px-10 max-w-4xl mx-auto">
-      <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-orange-500 text-center sm:text-left">
-        {blog.title}
-      </h1>
-      <p className="text-gray-400 mb-10 text-center sm:text-left text-sm sm:text-base">
-        {blog.date
-          ? new Date(blog.date).toLocaleDateString()
-          : "Date not available"}
-      </p>
-
-      <div className="overflow-x-auto">
-        <article
-          className="prose prose-invert text-base sm:text-lg max-w-full break-words whitespace-normal"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
+    <div className="bg-gray-900 text-white min-h-screen">
+      <Helmet>
+        <title>{blog.metaTitle || blog.title}</title>
+        <meta
+          name="description"
+          content={blog.metaDescription || blog.content?.slice(0, 150)}
         />
-      </div>
+      </Helmet>
 
-      <div className="mt-10 flex justify-center sm:justify-start">
-        <Link
-          to="/blog"
-          className="inline-block bg-orange-500 text-black font-semibold px-6 py-3 rounded-full hover:bg-orange-600 transition text-lg"
-        >
-          Back to Blog
+      {/* 🔥 FULL WIDTH IMAGE */}
+      <img
+        src={blog.image}
+        alt={blog.imageAlt || blog.title}
+        className="w-full max-h-[80vh] object-cover bg-black"
+      />
+
+      {/* 🔥 CONTENT CENTER */}
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-4xl font-bold text-orange-500">{blog.title}</h1>
+
+        <p className="text-gray-400 mb-6">
+          {new Date(blog.date).toLocaleDateString()}
+        </p>
+
+        <div
+          dangerouslySetInnerHTML={{
+            __html: blog.content.replace(
+              /href="(?!https?:\/\/)/g,
+              'href="https://',
+            ),
+          }}
+          className="prose prose-invert max-w-none 
+prose-ul:list-disc 
+prose-ol:list-decimal 
+prose-li:ml-4 
+prose-a:text-blue-400 
+hover:prose-a:text-blue-500 
+prose-a:underline"
+        />
+
+        <Link to="/blog" className="mt-6 inline-block text-orange-500">
+          ← Back
         </Link>
       </div>
     </div>
