@@ -43,7 +43,7 @@ const Footer = () => {
               />{" "}
             </div>{" "}
             {/* Button */}{" "}
-            <Link to="/package">
+            <Link to="/Pricing">
               {" "}
               <button className="px-5 py-2 bg-[#ff7515] hover:bg-white hover:text-black transition rounded-lg font-semibold">
                 {" "}

@@ -86,7 +86,7 @@ const Whychoose = () => {
             </h2>
 
             {/* Gradient Button */}
-            <Link to="/contact">
+            <Link to="/contact-us">
               <motion.button
                 whileHover={{ scale: 1.07 }}
                 whileTap={{ scale: 0.95 }}

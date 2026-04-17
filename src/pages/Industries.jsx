@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { trackEvent } from "../trackEvent";
-import { Helmet } from 'react-helmet-async';
-import {
-  FaReact,
-  FaNodeJs,
-  FaPython,
-  FaAws,
-  FaDocker,
-} from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
+import { FaReact, FaNodeJs, FaPython, FaAws, FaDocker } from "react-icons/fa";
 import { SiNextdotjs, SiMongodb, SiOpenai } from "react-icons/si";
 import { motion } from "framer-motion";
 import {
@@ -326,42 +320,41 @@ const Industries = () => {
   };
 
   return (
-  <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white py-20 px-6 relative">
-    <Helmet>
-      <title>IT Industries | ThinkBiz Hightech</title>
-      <meta
-        name="description"
-        content="IT industries driving innovation with cutting-edge technology solutions, delivering software, automation, and digital services to boost business growth."
-      />
-      <link rel="canonical" href="https://www.thinkbizhightech.com/" />
-    </Helmet>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white py-20 px-6 relative">
+      <Helmet>
+        <title>IT Industries | ThinkBiz Hightech</title>
+        <meta
+          name="description"
+          content="IT industries driving innovation with cutting-edge technology solutions, delivering software, automation, and digital services to boost business growth."
+        />
+        <link rel="canonical" href="https://www.thinkbizhightech.com/" />
+      </Helmet>
+      {/* ================= HERO ================= */}
+      <div className="max-w-7xl mx-auto text-center">
+        <span className="inline-block mb-4 px-4 py-1 rounded-full bg-orange-500/10 text-orange-400 font-semibold tracking-wide">
+          INDUSTRIES
+        </span>
 
-    {/* ================= HERO ================= */}
-    <div className="max-w-7xl mx-auto text-center">
-      <span className="inline-block mb-4 px-4 py-1 rounded-full bg-orange-500/10 text-orange-400 font-semibold tracking-wide">
-        INDUSTRIES
-      </span>
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-orange-500">
+          Industries We Serve
+        </h1>
 
-      <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-orange-500">
-        Industries We Serve
-      </h1>
+        <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10">
+          We deliver industry-specific digital solutions that help businesses
+          scale, automate operations, and achieve measurable growth.
+        </p>
 
-      <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10">
-        We deliver industry-specific digital solutions that help businesses
-        scale, automate operations, and achieve measurable growth.
-      </p>
-
-      {/* ================= STATS ================= */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto mb-28">
-  {[
-    { num: "10+", label: "Industries Served", icon: "🏭" },
-    { num: "150+", label: "Projects Delivered", icon: "🚀" },
-    { num: "4+", label: "Years Experience", icon: "⏳" },
-    { num: "98%", label: "Client Satisfaction", icon: "⭐" },
-  ].map(({ num, label, icon }) => (
-    <div
-      key={label}
-      className="
+        {/* ================= STATS ================= */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto mb-28">
+          {[
+            { num: "10+", label: "Industries Served", icon: "🏭" },
+            { num: "150+", label: "Projects Delivered", icon: "🚀" },
+            { num: "4+", label: "Years Experience", icon: "⏳" },
+            { num: "98%", label: "Client Satisfaction", icon: "⭐" },
+          ].map(({ num, label, icon }) => (
+            <div
+              key={label}
+              className="
         group relative overflow-hidden
         rounded-3xl p-6
         bg-gradient-to-br from-gray-800/80 to-gray-900/80
@@ -372,156 +365,148 @@ const Industries = () => {
         hover:border-[#ff7515]/60
         hover:shadow-[0_0_40px_rgba(255,117,21,0.35)]
       "
-    >
-      {/* Glow layer */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ff7515]/10 to-transparent opacity-0 group-hover:opacity-100 transition" />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center">
-        <span className="text-3xl mb-2">{icon}</span>
-
-        <p className="text-4xl font-extrabold text-[#ff7515]">
-          {num}
-        </p>
-
-        <p className="text-gray-300 mt-2 text-sm tracking-wide uppercase">
-          {label}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
-
-
-      {/* ================= GRID ================= */}
-      <h2 className="text-4xl font-bold text-center mb-16">
-        Industry-Specific Digital Expertise
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {industriesData.map(({ id, title, icon }) => (
-          <div
-            key={id}
-            onClick={() => handleIndustryClick(title)}
-            className="group bg-gray-800 border border-gray-700 rounded-3xl p-8 shadow-lg cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className="text-7xl mb-6 text-orange-500 group-hover:scale-110 transition">
-              {icon}
-            </div>
-
-            <h3 className="text-2xl font-semibold mb-4">{title}</h3>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleIndustryClick(title);
-              }}
-              className="mt-auto bg-orange-500 text-gray-900 font-semibold px-6 py-2 rounded-full hover:bg-orange-600 transition"
             >
-              Learn More →
-            </button>
-          </div>
-        ))}
-      </div>
+              {/* Glow layer */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ff7515]/10 to-transparent opacity-0 group-hover:opacity-100 transition" />
 
-      {/* ================= WHY CHOOSE ================= */}
-      <section className="mt-40 max-w-6xl mx-auto">
-  <motion.h2
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true }}
-    className="text-4xl md:text-5xl font-extrabold text-center mb-16"
-  >
-    Why Businesses Choose{" "}
-    <span className="text-[#ff7515]">ThinkBiz</span>
-  </motion.h2>
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <span className="text-3xl mb-2">{icon}</span>
 
-  <div className="grid md:grid-cols-3 gap-10">
-    {[
-      {
-        title: "Industry Expertise",
-        desc: "Deep understanding of domain-specific challenges and workflows",
-        icon: Briefcase,
-      },
-      {
-        title: "Custom Solutions",
-        desc: "Tailor-made software designed for your exact business needs",
-        icon: Puzzle,
-      },
-      {
-        title: "Scalable Architecture",
-        desc: "Future-ready systems that grow as your business expands",
-        icon: TrendingUp,
-      },
-      {
-        title: "Security First",
-        desc: "Enterprise-grade security with compliance and data protection",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Agile Delivery",
-        desc: "Rapid development cycles with faster go-to-market",
-        icon: Zap,
-      },
-      {
-        title: "Long-Term Support",
-        desc: "Reliable technical support and continuous optimisation",
-        icon: Headset,
-      },
-    ].map(({ title, desc, icon: Icon }, index) => (
-      <motion.div
-        key={title}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        viewport={{ once: true }}
-        className="group relative rounded-3xl p-[1.5px]"
-      >
-        {/* Gradient Border */}
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#ff7515] via-orange-400 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+                <p className="text-4xl font-extrabold text-[#ff7515]">{num}</p>
 
-        {/* Card */}
-        <div className="relative z-10 h-full bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl border border-gray-700 rounded-3xl p-8 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_0_45px_rgba(255,117,21,0.35)]">
-          {/* Icon */}
-          <div className="w-14 h-14 mb-6 flex items-center justify-center rounded-2xl bg-[#ff7515]/15">
-            <Icon className="w-7 h-7 text-[#ff7515]" />
-          </div>
-
-          <h3 className="text-2xl font-semibold mb-3 text-white">
-            {title}
-          </h3>
-
-          <p className="text-gray-300 leading-relaxed">
-            {desc}
-          </p>
+                <p className="text-gray-300 mt-2 text-sm tracking-wide uppercase">
+                  {label}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
 
-
-      {/* ================= TECHNOLOGIES ================= */}
-      <section className="mt-40 max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-14">
-          Technologies We Use
+        {/* ================= GRID ================= */}
+        <h2 className="text-4xl font-bold text-center mb-16">
+          Industry-Specific Digital Expertise
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-6">
-  {[
-    { name: "React", icon: <FaReact />, color: "text-cyan-400" },
-    { name: "Next.js", icon: <SiNextdotjs />, color: "text-white" },
-    { name: "Node.js", icon: <FaNodeJs />, color: "text-green-500" },
-    { name: "Python", icon: <FaPython />, color: "text-yellow-400" },
-    { name: "AWS", icon: <FaAws />, color: "text-orange-400" },
-    { name: "MongoDB", icon: <SiMongodb />, color: "text-green-400" },
-    { name: "Docker", icon: <FaDocker />, color: "text-blue-400" },
-    { name: "AI / ML", icon: <SiOpenai />, color: "text-[#ff7515]" },
-  ].map((tech) => (
-    <div
-      key={tech.name}
-      className="
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {industriesData.map(({ id, title, icon }) => (
+            <div
+              key={id}
+              onClick={() => handleIndustryClick(title)}
+              className="group bg-gray-800 border border-gray-700 rounded-3xl p-8 shadow-lg cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="text-7xl mb-6 text-orange-500 group-hover:scale-110 transition">
+                {icon}
+              </div>
+
+              <h3 className="text-2xl font-semibold mb-4">{title}</h3>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleIndustryClick(title);
+                }}
+                className="mt-auto bg-orange-500 text-gray-900 font-semibold px-6 py-2 rounded-full hover:bg-orange-600 transition"
+              >
+                Learn More →
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* ================= WHY CHOOSE ================= */}
+        <section className="mt-40 max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-extrabold text-center mb-16"
+          >
+            Why Businesses Choose{" "}
+            <span className="text-[#ff7515]">ThinkBiz</span>
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Industry Expertise",
+                desc: "Deep understanding of domain-specific challenges and workflows",
+                icon: Briefcase,
+              },
+              {
+                title: "Custom Solutions",
+                desc: "Tailor-made software designed for your exact business needs",
+                icon: Puzzle,
+              },
+              {
+                title: "Scalable Architecture",
+                desc: "Future-ready systems that grow as your business expands",
+                icon: TrendingUp,
+              },
+              {
+                title: "Security First",
+                desc: "Enterprise-grade security with compliance and data protection",
+                icon: ShieldCheck,
+              },
+              {
+                title: "Agile Delivery",
+                desc: "Rapid development cycles with faster go-to-market",
+                icon: Zap,
+              },
+              {
+                title: "Long-Term Support",
+                desc: "Reliable technical support and continuous optimisation",
+                icon: Headset,
+              },
+            ].map(({ title, desc, icon: Icon }, index) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative rounded-3xl p-[1.5px]"
+              >
+                {/* Gradient Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#ff7515] via-orange-400 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+
+                {/* Card */}
+                <div className="relative z-10 h-full bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl border border-gray-700 rounded-3xl p-8 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_0_45px_rgba(255,117,21,0.35)]">
+                  {/* Icon */}
+                  <div className="w-14 h-14 mb-6 flex items-center justify-center rounded-2xl bg-[#ff7515]/15">
+                    <Icon className="w-7 h-7 text-[#ff7515]" />
+                  </div>
+
+                  <h3 className="text-2xl font-semibold mb-3 text-white">
+                    {title}
+                  </h3>
+
+                  <p className="text-gray-300 leading-relaxed">{desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= TECHNOLOGIES ================= */}
+        <section className="mt-40 max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-14">Technologies We Use</h2>
+
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              { name: "React", icon: <FaReact />, color: "text-cyan-400" },
+              { name: "Next.js", icon: <SiNextdotjs />, color: "text-white" },
+              { name: "Node.js", icon: <FaNodeJs />, color: "text-green-500" },
+              { name: "Python", icon: <FaPython />, color: "text-yellow-400" },
+              { name: "AWS", icon: <FaAws />, color: "text-orange-400" },
+              { name: "MongoDB", icon: <SiMongodb />, color: "text-green-400" },
+              { name: "Docker", icon: <FaDocker />, color: "text-blue-400" },
+              { name: "AI / ML", icon: <SiOpenai />, color: "text-[#ff7515]" },
+            ].map((tech) => (
+              <div
+                key={tech.name}
+                className="
         group w-28 h-28 
         flex flex-col items-center justify-center 
         rounded-2xl 
@@ -529,52 +514,49 @@ const Industries = () => {
         transition-all duration-300
         hover:bg-[#ff7515]
       "
-    >
-      <div
-        className={`
+              >
+                <div
+                  className={`
           text-4xl mb-2 
           ${tech.color}
           group-hover:text-black
           group-hover:scale-110
           transition-all duration-300
         `}
-      >
-        {tech.icon}
+                >
+                  {tech.icon}
+                </div>
+
+                <span className="text-sm font-medium text-gray-300 group-hover:text-black transition">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= FINAL CTA ================= */}
+        <section className="mt-44 bg-gradient-to-r from-[#ff7515] to-black py-24 text-center rounded-3xl max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+            Ready to Transform Your Industry?
+          </h2>
+
+          <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+            Let’s discuss how our industry-specific digital solutions can help
+            your business grow faster and smarter.
+          </p>
+
+          <a
+            href="https://wa.me/918512001218"
+            target="_blank"
+            className="inline-flex items-center gap-2 bg-white text-black px-10 py-4 rounded-full font-semibold hover:scale-110 transition"
+          >
+            Talk to an Expert →
+          </a>
+        </section>
       </div>
-
-      <span className="text-sm font-medium text-gray-300 group-hover:text-black transition">
-        {tech.name}
-      </span>
-    </div>
-  ))}
-</div>
-
-      </section>
-
-      {/* ================= FINAL CTA ================= */}
-      <section className="mt-44 bg-gradient-to-r from-[#ff7515] to-black py-24 text-center rounded-3xl max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-          Ready to Transform Your Industry?
-        </h2>
-
-        <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-          Let’s discuss how our industry-specific digital solutions can
-          help your business grow faster and smarter.
-        </p>
-
-        <a
-          href="https://wa.me/918512001218"
-          target="_blank"
-          className="inline-flex items-center gap-2 bg-white text-black px-10 py-4 rounded-full font-semibold hover:scale-110 transition"
-        >
-          Talk to an Expert →
-        </a>
-      </section>
-      
-    </div>
-
-    {/* ================= MODAL (UNCHANGED, CLEAN) ================= */}
-    {selected && selectedIndustry && (
+      {/* ================= MODAL (UNCHANGED, CLEAN) ================= */}
+      {selected && selectedIndustry && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50 overflow-auto"
           style={{ WebkitOverflowScrolling: "touch" }}
@@ -633,7 +615,7 @@ const Industries = () => {
                   </button>
 
                   <a
-                    href="/contact"
+                    href="/contact-us"
                     className="bg-black text-white font-semibold px-8 py-3 rounded-full hover:bg-[#ff7515] transition"
                   >
                     Free Consultation
@@ -658,11 +640,12 @@ const Industries = () => {
             </div>
           </div>
         </div>
-      )}    <WhatsAppButton />
+      )}{" "}
+      <WhatsAppButton />
       <Newsletter />
       <div className="w-full h-px bg-[#ff7515] opacity-90 my-16" />
-  </div>
-);
+    </div>
+  );
 };
 
 export default Industries;

@@ -65,7 +65,13 @@ prose-ol:list-decimal
 prose-li:ml-4 
 prose-a:text-blue-400 
 hover:prose-a:text-blue-500 
-prose-a:underline"
+prose-a:underline
+
+  [&_h1]:text-4xl 
+  [&_h2]:text-3xl 
+  [&_h3]:text-2xl 
+  [&_h4]:text-xl 
+  [&_p]:text-base"
         />
 
         <Link to="/blog" className="mt-6 inline-block text-orange-500">

@@ -71,7 +71,7 @@ const Slider = () => {
 
                 {/* ⭐ TRACK event: Book Meeting Click */}
                 <Link
-                  to="/contact"
+                  to="/contact-us"
                   onClick={() =>
                     trackEvent("slider_book_meeting_click", {
                       slide_title: slide.title,

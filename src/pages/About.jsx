@@ -5,7 +5,7 @@ import { FaUsers, FaAward, FaRocket, FaHeadset } from "react-icons/fa";
 import Newsletter from "../assets/Component/NewsLetterbox";
 import WhatsAppButton from "../assets/Component/WhatsAppButton";
 import { trackEvent } from "../trackEvent";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   const aboutStats = [
@@ -22,15 +22,13 @@ const About = () => {
 
   return (
     <div className="font-sans text-gray-800">
-       <Helmet>
-        <title>Best IT Company in India, Noida, Delhi NCR
-</title>
- <meta
-      name="Description"
-      content="ThinkBizHighTech – We are a leading IT company in Noida, Which provides all the IT services."
-    />
-      <link rel="canonical" href="https://www.thinkbizhightech.com/" />
-        
+      <Helmet>
+        <title>Best IT Company in India, Noida, Delhi NCR</title>
+        <meta
+          name="Description"
+          content="ThinkBizHighTech – We are a leading IT company in Noida, Which provides all the IT services."
+        />
+        <link rel="canonical" href="https://www.thinkbizhightech.com/" />
       </Helmet>
       {/* ================= HERO ================= */}
       <section className="py-6 px-6 bg-[#ff7515] text-black">
@@ -259,7 +257,7 @@ const About = () => {
           Partner with ThinkBiz Hightech and grow your business digitally.
         </p>
 
-        <Link to="/contact">
+        <Link to="/contact-us">
           <button
             onClick={() => trackEvent("Clicked Contact Us Button - About Page")}
             className="bg-white text-black font-semibold px-10 py-3 rounded-full shadow-md hover:bg-gray-200 transition"
