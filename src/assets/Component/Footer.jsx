@@ -21,7 +21,7 @@ const Footer = () => {
           {/* 1️⃣ SOCIAL */}{" "}
           <div>
             {" "}
-            <img
+            <img                        
               src="/logo-black.svg"
               alt="Logo"
               className="w-44 h-auto"

@@ -179,7 +179,7 @@ Phone: ${formData.phone}`;
       </Helmet>
       <div className="font-sans text-gray-800 bg-gradient-to-b from-gray-50 to-white">
         {/* HERO with animated gradient */}
-        <section className="relative bg-black text-black py-16 md:py-20 lg:py-24 px-4 sm:px-6 text-center overflow-hidden">
+        {/* <section className="relative bg-black text-black py-16 md:py-20 lg:py-24 px-4 sm:px-6 text-center overflow-hidden">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
@@ -199,8 +199,189 @@ Phone: ${formData.phone}`;
               results that transform businesses
             </p>
           </div>
-        </section>
+        </section> */}
+        <section className="relative bg-black py-16 md:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden">
+          {/* Background Effects */}
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
 
+          {/* Two Column Layout */}
+          <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Hero Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-block px-4 py-2 rounded-full bg-white text-[#ff7515] text-xs sm:text-sm font-medium mb-5 animate-pulse">
+                ⭐ #1 Rated Digital Marketing Agency in Australia
+              </div>
+
+              <h1
+                className="
+        font-bold
+        leading-tight
+        mb-6
+        text-4xl
+        sm:text-5xl
+        md:text-6xl
+        lg:text-6xl
+      "
+              >
+                <span className="text-[#ff7515] block">Digital Marketing</span>
+                <span className="text-[#ff7515] block">Company in</span>
+                <span className="text-white block">Australia</span>
+              </h1>
+
+              <p
+                className="
+        text-base
+        sm:text-lg
+        md:text-xl
+        text-gray-100
+        max-w-2xl
+        mx-auto
+        lg:mx-0
+        leading-relaxed
+      "
+              >
+                Data-driven strategies, creative excellence, and measurable
+                results that transform businesses.
+              </p>
+            </div>
+
+            {/* Right Popup Card - POWERFUL BLINK EFFECT */}
+            <div className="flex justify-center lg:justify-end">
+              <div
+                className="
+        bg-[#ff7515]
+        text-white
+        rounded-3xl
+        shadow-2xl
+        p-8
+        w-full
+        max-w-[360px]
+        hover:scale-105
+        transition-transform
+        duration-300
+        relative
+      "
+                style={{
+                  animation:
+                    "blinkBorder 1.2s ease-in-out infinite, glow 2s ease-in-out infinite",
+                  boxShadow: "0 0 20px rgba(255, 117, 21, 0.5)",
+                }}
+              >
+                {/* Blinking border rings */}
+                <div
+                  className="absolute inset-0 rounded-3xl"
+                  style={{
+                    animation: "ringPulse 1.2s ease-out infinite",
+                    boxShadow: "0 0 0 0 rgba(255, 117, 21, 0.7)",
+                  }}
+                ></div>
+
+                <div
+                  className="absolute inset-0 rounded-3xl"
+                  style={{
+                    animation: "ringPulse 1.2s ease-out infinite 0.6s",
+                    boxShadow: "0 0 0 0 rgba(255, 117, 21, 0.7)",
+                  }}
+                ></div>
+
+                <span
+                  className="bg-white text-[#ff7515] text-xs font-semibold px-4 py-2 rounded-full inline-block relative z-10"
+                  style={{ animation: "shake 0.8s ease-in-out infinite" }}
+                >
+                  🔥 Limited Offer 🔥
+                </span>
+
+                <h3
+                  className="text-3xl font-bold mt-5 relative z-10"
+                  style={{ animation: "textBlink 1s ease-in-out infinite" }}
+                >
+                  Free Website SEO Audit 🚀
+                </h3>
+
+                <p className="mt-4 text-base leading-relaxed relative z-10">
+                  Get your first SEO Audit absolutely free and grow faster.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Add these styles to your global CSS or in a <style> tag */}
+          <style jsx>{`
+            @keyframes blinkBorder {
+              0%,
+              100% {
+                border: 2px solid rgba(255, 117, 21, 0.3);
+              }
+              50% {
+                border: 2px solid rgba(255, 117, 21, 1);
+              }
+            }
+
+            @keyframes ringPulse {
+              0% {
+                box-shadow: 0 0 0 0 rgba(255, 117, 21, 0.7);
+              }
+              70% {
+                box-shadow: 0 0 0 20px rgba(255, 117, 21, 0);
+              }
+              100% {
+                box-shadow: 0 0 0 0 rgba(255, 117, 21, 0);
+              }
+            }
+
+            @keyframes glow {
+              0%,
+              100% {
+                box-shadow: 0 0 20px rgba(255, 117, 21, 0.5);
+              }
+              50% {
+                box-shadow:
+                  0 0 40px rgba(255, 117, 21, 0.9),
+                  0 0 60px rgba(255, 117, 21, 0.5);
+              }
+            }
+
+            @keyframes shake {
+              0%,
+              100% {
+                transform: translateX(0);
+              }
+              25% {
+                transform: translateX(-3px);
+              }
+              75% {
+                transform: translateX(3px);
+              }
+            }
+
+            @keyframes textBlink {
+              0%,
+              100% {
+                opacity: 1;
+                text-shadow: 0 0 0px rgba(255, 255, 255, 0);
+              }
+              50% {
+                opacity: 0.85;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+              }
+            }
+
+            @keyframes buttonPulse {
+              0%,
+              100% {
+                transform: scale(1);
+              }
+              50% {
+                transform: scale(1.05);
+                background-color: #ff7515;
+                color: white;
+                box-shadow: 0 0 15px white;
+              }
+            }
+          `}</style>
+        </section>
         {/* MAIN SECTION */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
